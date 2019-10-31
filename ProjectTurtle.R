@@ -1,15 +1,20 @@
 library("TurtleGraphics")
+turtle_init()
 
 
 seed_keyboard<-function()
 {
   Seed=""
   scan<-readline(prompt="Veuillez entrez la seed de votre futur dessin : \n")
+  #print(scan)
   for(i in 1:nchar(scan))
   {
+    #print(i)
     a <- substr(scan,i,i)
+    # print(a)
     Seed <- paste(Seed,utf8ToInt(a),sep="")
   }
+  #print(Seed)
   while(nchar(Seed) < 40)
   {
     tmp1 <- as.integer(substr(Seed,nchar(Seed),nchar(Seed)))*6497
@@ -19,10 +24,52 @@ seed_keyboard<-function()
   {
     Seed <- substr(Seed,1,nchar(Seed) - nchar(Seed)%%40)
   }
-  print(Seed)
+  return(Seed)
+}
+Fill<-function(Longueur,Largeur=Longueur)
+{
+  if(is.null(Largeur)){Largeur<-Longueur} # Un carré wesh
+  turtle_param("yellow",lwd=Largeur)
+  turtle_forward(Largeur)
+  turtle_setangle(90)
+  turtle_forward(Longueur)
+  
 }
 
-Quadri <- function(l,L,i=1,colour) #l = Longueur L = largeur
+
+
+EspaceY<-function(Distance)
+{
+  
+  x<-turtle_getpos()["x"]
+  y<-turtle_getpos()["y"]
+  turtle_up()
+  turtle_goto(as.integer(substr(x,1,10)),as.integer(substr(y,1,10))-Distance)
+  turtle_down()
+}
+EspaceX<-function(Distance)
+{
+  
+  x<-turtle_getpos()["x"]
+  y<-turtle_getpos()["y"]
+  turtle_up()
+  turtle_goto(as.integer(substr(x,1,10))-Distance,as.integer(substr(y,1,10)))
+  turtle_down()
+}
+
+Turtle_Coloriage<-function(color)
+{
+  turtle_goto(0)
+  turtle_setangle(0)
+  QuadraFill(20,100)
+}
+turtle_start<-function()
+{
+  turtle_init(100)
+  turtle_hide()
+}
+
+Quadri <- function(l,L,i,colour) #l = Longueur L = largeur
 {
   k <- l
   l <- L
@@ -58,7 +105,7 @@ Quadri <- function(l,L,i=1,colour) #l = Longueur L = largeur
 
 seed_keyboardFAKE<-function()
 {
-  return ("572657264544")
+  return ("212922282821")
 }
 
 Dessin<-function()
@@ -66,15 +113,18 @@ Dessin<-function()
   ################## INITI ######################
   Seed<-seed_keyboard()
   SeedVector<-c(unlist(strsplit(Seed,"")))
- # somme<-as.integer(SeedVector[1])+as.integer(SeedVector[3])+as.integer(SeedVector[5])+as.integer(SeedVector[7])+as.integer(SeedVector[9])+as.integer(SeedVector[11])
-  somme <- SommeLongueur(SeedVector)
+  for(compteurVerif in 1:(length(SeedVector)))
+  {
+    if (SeedVector[compteurVerif]==0){SeedVector[compteurVerif]<-1}
+  }
+  somme<-SommeLongueur(SeedVector)
   turtle_init((somme*10),(somme*10)*3/4,c("clip"))
   turtle_hide()
   ###############################################
   
   #############CIEL###################
   turtle_setpos(0,0)
-  Quadri((somme*10),(somme*10)*3/4,1,"black")
+  Quadri((somme*10),(somme*10)*3/4,0.5,"black")
   #####################################
   
   ################### Chunk  ##############
@@ -82,28 +132,31 @@ Dessin<-function()
   compteurX<-1
   compteurY<-0
   
-  for(i in 1:somme)
+  for(i in 1:(nchar(Seed)/2))
   {
     compteurY<-compteurY+2
     
     Chunk(posX*10,as.integer(SeedVector[compteurY])*10,as.integer(SeedVector[compteurX])*10,as.integer(SeedVector[compteurY])*10)
-    
+    DifferenceHauteurFutur<-as.integer(SeedVector[compteurY])-as.integer(SeedVector[compteurY+2])
+    print(DifferenceHauteurFutur)
+    if(DifferenceHauteurFutur<(-2))
+    {
+      SeedVector[compteurY+2]<-as.integer(SeedVector[compteurY+2])+DifferenceHauteurFutur+2
+    }
+    else if(DifferenceHauteurFutur>2)
+    {
+      SeedVector[compteurY+2]<-as.integer(SeedVector[compteurY+2])+DifferenceHauteurFutur-2
+    }
+    else
+    {
+      DifferenceHauteurReel<-0
+    }
     posX<-posX+as.integer(SeedVector[compteurX])
     
     compteurX<-compteurX+2
   }
-   
+  
 }
- 
-
-Chunk<-function(posX,posY,Longueur,Hauteur)
-{
-  setpos(posX,posY)
-  Quadri(Longueur,10,1,"green")
-  setpos(posX,posY-(Hauteur+1))
-  Quadri(Longueur,Hauteur,1,"brown")
-}
-
 SommeLongueur <- function(c)
 {
   i<-1
@@ -117,6 +170,13 @@ SommeLongueur <- function(c)
 }
 
 
+Chunk<-function(posX,posY,Longueur,Hauteur)
+{
+  setpos(posX,posY+40)
+  Quadri(Longueur,10,0.5,"green")
+  setpos(posX,0)
+  Quadri(Longueur,Hauteur+40,0.5,"brown")
+}
 
 
 setpos<-function(x,y)
@@ -126,16 +186,3 @@ setpos<-function(x,y)
   turtle_down()
   turtle_setangle(0)
 }
-
-
-testwhile <- function()
-{
-  i <- 1
-  while (i < 40)
-  {
-    print(i)
-    i <- i+2
-  }
-  print(i)
-}
-
