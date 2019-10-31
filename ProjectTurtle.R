@@ -173,9 +173,13 @@ SommeLongueur <- function(c)
 Chunk<-function(posX,posY,Longueur,Hauteur)
 {
   setpos(posX,posY+40)
-  Quadri(Longueur,10,0.5,"green")
+  Quadri(Longueur,10,0.5,"#2C833D")
   setpos(posX,0)
-  Quadri(Longueur,Hauteur+40,0.5,"brown")
+  Quadri(Longueur,Hauteur+40,0.5,"#8A502F")
+  setpos(posX,0)
+  Quadri(Longueur,Hauteur+10,0.5,"#A2A5A4")
+  setpos(posX,0)
+  Quadri(Longueur,Hauteur-2,0.5,"#8C8D8D")
 }
 
 
