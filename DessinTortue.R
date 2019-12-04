@@ -3,17 +3,17 @@ library("TurtleGraphics")
 source("Outils.R")
 
 
-DoIt_Dessin <- function(vecteur,taille_vecteur)
+DoIt_Dessin <- function(vecteur,taille_vecteur)  # Fonction principale qui dessine l'integralite du dessin final
 {
-  print(vecteur) # Vérification de l'intégrité du seed :D
+  print(vecteur) # Verification de l'integrite du seed :D
   taille_monde <- (SommeVecteur(vecteur,taille_vecteur) * 10)
-  print(taille_monde)
+  print(taille_monde) # debug
   Intitialisation(taille_monde)
   Ciel(taille_monde)
   #Astre(taille_monde)
   Chunk(vecteur,taille_vecteur)
-  # Arbre(vecteur,taille_monde,taille_vecteur)
-  # Buisson(vecteur,taille_monde,taille_vecteur)
+  Arbre(vecteur,taille_monde,taille_vecteur)
+  Buisson(vecteur,taille_monde,taille_vecteur)
   
 }
   
@@ -31,13 +31,12 @@ Ciel <- function(taille_monde)
 
 Chunk <- function(vecteur,taille_vecteur)
 {
-  posX <- 0
-  compteurX <- 1
-  compteurY <- 0
+  posX <- 0                   # mise a zero des coordonnees ( exemple seed : 4 8 6 7) 
+  compteurX <- 1              # 4 definit la longueur du chunk n°1   |  6 definit la longueur du chunk n°2
+  compteurY <- 0              # 8 definit la position Y du chunk n°1 |  7 definit la position Y du chunk n°2
   
-  for (j in 1:(taille_vecteur/2))
-  {
-    print(j)
+  for (j in 1:(taille_vecteur/2))     # On divise par 2 car, par exemple pour un seed de 40 chiffres, 
+  {                                   # on a bien 20 chunk avec 20 position de Y
     compteurY <- compteurY+2
     
     OutilsChunk(posX*10, vecteur[compteurY]*10, vecteur[compteurX]*10,vecteur[compteurY]*10)
@@ -48,8 +47,51 @@ Chunk <- function(vecteur,taille_vecteur)
   }
 }
 
-# Arbre <- function()
+Arbre <- function(vecteur,taille_monde,taille_vecteur)
+{
+  posX <- 0                   # mise a zero des coordonnees ( exemple seed : 4 8 6 7) 
+  compteurX <- 1              # 4 definit la longueur du chunk n°1   |  6 definit la longueur du chunk n°2
+  compteurY <- 0              # 8 definit la position Y du chunk n°1 |  7 definit la position Y du chunk n°2
+  
+  for(i in 1:(taille_vecteur/2 -1))    # un arbre ne peut pas se situer sur le dernier chunk (pour la verification de compteurX + 2)
+  {
+    compteurY <- compteurY+2
+    if (vecteur[compteurX] > 8)    # On evite de faire un seul if a cause des bugs de TRUE / FALSE needed
+    {
+      if (vecteur[compteurX+2] > 4)
+      {
+        OutilsArbre( (posX*10 + vecteur[compteurX]*10 *(3/5)) , vecteur[compteurY]*10, taille_monde,vecteur,taille_vecteur)
+      }
+    }
+    
+    posX <- posX + vecteur[compteurX]
+    compteurX <- compteurX+2
+  }
+}
 
+Buisson <- function(vecteur,taille_monde,taille_vecteur)
+{
+  posX <- 0                   # mise e zero des coordonnees ( exemple seed : 4 8 6 7) 
+  compteurX <- 1              # 4 definit la longueur du chunk n°1   |  6 definit la longueur du chunk n°2
+  compteurY <- 0              # 8 definit la position Y du chunk n°1 |  7 definit la position Y du chunk n°2
+  
+  for (k in 1:(taille_vecteur/2-1))
+  {
+    compteurY <- compteurY+2
+    
+    if (vecteur[compteurX] > 4)   # On evite de faire un seul if à cause des bugs de TRUE / FALSE needed
+    {
+      if (vecteur[compteurX+2] > 3)
+      {
+        OutilsBuisson(posX*10 + vecteur[compteurX]*10 / 2, vecteur[compteurY]*10,vecteur,taille_vecteur)
+      }
+    }
+    
+    posX <- posX + vecteur[compteurX]
+    
+    compteurX <- compteurX+2
+  }
+}
   
   
   #Chunk(posX*10, as.integer(SeedVector[compteurY])*10, as.integer(SeedVector[compteurX])*10, as.integer(SeedVector[compteurY])*10)
