@@ -1,7 +1,8 @@
 DoIt_Seed<-function(vecteur,taille)
 {
   scan<-EntreeClavier()
-  creationDuSeed(scan,vecteur,taille)
+  vecteur <- creationDuSeed(scan,vecteur,taille)
+  return(vecteur)
 }
 
 EntreeClavier<-function()
