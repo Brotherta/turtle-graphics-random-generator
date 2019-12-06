@@ -5,9 +5,19 @@ DoIt_Seed<-function(vecteur,taille)
   return(vecteur)
 }
 
+
+
 EntreeClavier<-function()
 {
-  scan<-readline(prompt="Veuillez entrez votre seed :D :  ")    # La suite de caractere qui definira le dessin
+  scan<-readline(prompt="Veuillez entrez votre seed :D (max 30 caracteres):  ")    # La suite de caractere qui definira le dessin
+  if (nchar(scan) > 30) 
+  {
+    print("Seed trop longue ! (max 30 caracteres) :  ")
+    while(nchar(scan) > 30)
+    {
+      scan<-readline(prompt="Seed  (max 30 caracteres) :  ")
+    }
+  }
   return (scan)
 }
 
@@ -50,17 +60,33 @@ CreationDuvecteurTemporaire<-function(scan,taille)
     {
       tmp<-paste(tmp,as.character(utf8ToInt(scan)*hasard),sep="",collapse=NULL)
       hasard<-hasard+33
+      
     }
-    
   }
-  tmpNum<-numeric(taille)      # pour eviter des problemes de type, on passe tmp en numeric et on lui affecte des integer
-  for(j in 1:taille)
-  {
-    tmpNum[j]<-as.integer(substr(tmp,j,j))
-  }
+  #print(tmp)
+  tmpNum<- hashDuSeed(tmp,taille)
   return (tmpNum)
 }
 
-
+hashDuSeed <- function(tmp,taille)
+{
+  tmp_entier <- paste(tmp, collapse="")
+  tmp_vecteur <- numeric(nchar(tmp_entier))
+  #print(tmp_entier)
+  for (l in 1:(nchar(tmp_entier)))
+  {
+    tmp_vecteur[l] <- as.integer(substr(tmp_entier,l,l))
+    
+  }
+  
+  tmpNum<-numeric(taille) # pour eviter des problemes de type, on passe tmp en numeric et on lui affecte des integer
+  #print(tmp_vecteur)
+  for(j in 1:taille)
+  {
+    tmpNum[j]<-tmp_vecteur[j + (length(tmp_vecteur)/taille)]
+    
+  }
+  return (tmpNum)
+}
 
 
