@@ -10,7 +10,7 @@ DoIt_Dessin <- function(vecteur,taille_vecteur)  # Fonction principale qui dessi
   print(taille_monde) # debug
   Intitialisation(taille_monde)
   Ciel(taille_monde)
-  #Astre(taille_monde)
+  #Astre(vecteur,taille_monde)
   Chunk(vecteur,taille_vecteur)
   Arbre(vecteur,taille_monde,taille_vecteur)
   Buisson(vecteur,taille_monde,taille_vecteur)
@@ -95,6 +95,36 @@ Buisson <- function(vecteur,taille_monde,taille_vecteur)
     compteurX <- compteurX+2
   }
 }
+
+Astre<-function()
+{
+  turtle_init()
+  turtle_hide()
+  x<-6
+  for(i in 1:60)
+  {
+    turtle_setangle(-20+x)
+    turtle_forward(2)
+    x<-x+6
+  }
+}
+
+Astre2<-function(vecteur,taille_vecteur=40,taille_monde=800)
+{
+  taille<-taille_monde/8  ## ni trop gros ni trop petit. Au pifff
+  if
+  #setpos(taille_monde,(((taille_monde)*3/4)))  
+  for(increment in 360:0)
+  {
+    turtle_setangle(increment)
+    turtle_param(lwd=7)
+    turtle_forward(taille)
+    turtle_backward(taille)
+    
+  }
+}
+
+
   
   
   #Chunk(posX*10, as.integer(SeedVector[compteurY])*10, as.integer(SeedVector[compteurX])*10, as.integer(SeedVector[compteurY])*10)
