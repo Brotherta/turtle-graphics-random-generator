@@ -52,16 +52,19 @@ Arbre <- function(vecteur,taille_monde,taille_vecteur)
   posX <- 0                   # mise a zero des coordonnees ( exemple seed : 4 8 6 7) 
   compteurX <- 1              # 4 definit la longueur du chunk n°1   |  6 definit la longueur du chunk n°2
   compteurY <- 0              # 8 definit la position Y du chunk n°1 |  7 definit la position Y du chunk n°2
-  
+  presence_arbre_position_precedente<-0
   for(i in 1:(taille_vecteur/2 -1))    # un arbre ne peut pas se situer sur le dernier chunk (pour la verification de compteurX + 2)
   {
     compteurY <- compteurY+2
-    if (vecteur[compteurX] > 8)    # On evite de faire un seul if a cause des bugs de TRUE / FALSE needed
+    if (vecteur[compteurY] > 6)    # On evite de faire un seul if a cause des bugs de TRUE / FALSE needed
     {
-      if (vecteur[compteurX+2] > 4)
+      if (vecteur[compteurY+2] > 4 && presence_arbre_position_precedente==0)
       {
         OutilsArbre( (posX*10 + vecteur[compteurX]*10 *(3/5)) , vecteur[compteurY]*10, taille_monde,vecteur,taille_vecteur)
+        presence_arbre_position_precedente<-1
       }
+      else{presence_arbre_position_precedente<-0}
+      
     }
     
     posX <- posX + vecteur[compteurX]

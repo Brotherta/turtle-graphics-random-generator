@@ -18,8 +18,8 @@ creationDuSeed<-function(scan,vecteur,taille)
   y<-2
   while(i<=taille)           
   {
-    if(vecteurTemporaire[y]==0){vecteurTemporaire[y]<-1}
-    if(vecteurTemporaire[i]==0){vecteurTemporaire[i]<-1}
+    if(vecteurTemporaire[y]==0 || vecteurTemporaire[y]==1){vecteurTemporaire[y]<-3}
+    if((vecteurTemporaire[i]==0 || vecteurTemporaire[i]==1)){vecteurTemporaire[i]<-3}
     if(y+2<=taille)
     {
       DifferenceY<-vecteurTemporaire[y+2]-vecteurTemporaire[y]
@@ -45,9 +45,11 @@ CreationDuvecteurTemporaire<-function(scan,taille)
   tmp<-utf8ToInt(scan)*1234 # tmp prend la valeur de scan, en int, et agrandi par un nombre défini au hasard
   if(nchar(tmp)<taille)     # Si la taille de tmp est trop faible pour remplir le vecteur voulu, on l'agrandi (dans le while)
   {
+    hasard<-5678
     while(nchar(tmp)<taille)
     {
-      tmp<-paste(tmp,as.character(utf8ToInt(scan)*5678),sep="",collapse=NULL)
+      tmp<-paste(tmp,as.character(utf8ToInt(scan)*hasard),sep="",collapse=NULL)
+      hasard<-hasard+33
     }
     
   }

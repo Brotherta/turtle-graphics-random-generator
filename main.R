@@ -12,7 +12,8 @@ DoIt<-function(taille = 40)
   }
   vecteur<-numeric(taille) # création du vecteur qui contiendra la suite de chiffre permettant de généré le dessin
   vecteur<-DoIt_Seed(vecteur,taille) #  On set les valeurs du vecteur anciennement vide
-  Dessin(vecteur,taille)
+  print(vecteur)
+  DoIt_Dessin(vecteur,taille)
 }
 
 
