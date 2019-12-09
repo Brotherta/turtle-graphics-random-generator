@@ -10,10 +10,11 @@ DoIt_Dessin <- function(vecteur,taille_vecteur)  # Fonction principale qui dessi
   print(taille_monde) # debug
   Intitialisation(taille_monde)
   Ciel(taille_monde)
-  #Astre(taille_monde)
+  Astre(taille_monde,vecteur,taille_vecteur)
   Chunk(vecteur,taille_vecteur)
   Arbre(vecteur,taille_monde,taille_vecteur)
   Buisson(vecteur,taille_monde,taille_vecteur)
+  
   
 }
   
@@ -25,8 +26,57 @@ Intitialisation <- function(taille_monde)
 
 Ciel <- function(taille_monde)
 {
-  turtle_setpos(0,0)
-  Quadri(taille_monde, (taille_monde*3/4), 0.5, "black", 7)
+  taille_mondeY=taille_monde*3/4
+  taille_mondeDecalageY=taille_mondeY/4
+  if(taille_monde>=950)
+  {
+    
+    
+    turtle_setangle(0)                                                #La tortue doit regarder vers le haut pour faire le rectangle de haut en bas
+    taille_mondeY=taille_mondeY-taille_mondeDecalageY                 #La tortue fait 4 rectangle. On supprime le rectangle précédent à sa position.
+    turtle_setpos(0,taille_mondeY)                                    #Pour un tailleY de 1000 on fera donc 4rec de 250. En pos 750 500 250 0
+    Quadri(taille_monde,taille_mondeDecalageY, 0.5, "#57CEFF", 7)     #Degrade de couleur
+    
+    turtle_setangle(0)
+    taille_mondeY=taille_mondeY-taille_mondeDecalageY
+    turtle_setpos(0,taille_mondeY)
+    Quadri(taille_monde,taille_mondeDecalageY, 0.5, "#4F93E8", 7)
+   
+    turtle_setangle(0)
+    taille_mondeY=taille_mondeY-taille_mondeDecalageY   
+    turtle_setpos(0,taille_mondeY)
+    Quadri(taille_monde,taille_mondeDecalageY, 0.5, "#6481FF", 7)
+    
+    turtle_setangle(0)
+    taille_mondeY=taille_mondeY-taille_mondeDecalageY
+    turtle_setpos(0,taille_mondeY)
+    Quadri(taille_monde,taille_mondeDecalageY, 0.5, "#5C4FE8", 7)
+    
+  }
+  else
+  {
+    turtle_setangle(0)                                                #La tortue doit regarder vers le haut pour faire le rectangle de haut en bas
+    taille_mondeY=taille_mondeY-taille_mondeDecalageY                 #La tortue fait 4 rectangle. On supprime le rectangle précédent à sa position.
+    turtle_setpos(0,taille_mondeY)                                    #Pour un tailleY de 1000 on fera donc 4rec de 250. En pos 750 500 250 0
+    Quadri(taille_monde,taille_mondeDecalageY, 0.5, "#4D423F", 7)     #Degrade de couleur
+    
+    turtle_setangle(0)
+    taille_mondeY=taille_mondeY-taille_mondeDecalageY
+    turtle_setpos(0,taille_mondeY)
+    Quadri(taille_monde,taille_mondeDecalageY, 0.5, "#332D2A", 7)
+    
+    turtle_setangle(0)
+    taille_mondeY=taille_mondeY-taille_mondeDecalageY   
+    turtle_setpos(0,taille_mondeY)
+    Quadri(taille_monde,taille_mondeDecalageY, 0.5, "#121110", 7)
+    
+    turtle_setangle(0)
+    taille_mondeY=taille_mondeY-taille_mondeDecalageY
+    turtle_setpos(0,taille_mondeY)
+    Quadri(taille_monde,taille_mondeDecalageY, 0.5, "#000000", 7)
+  }
+  
+ # Quadri(taille_monde, (taille_monde*3/4), 0.5, "black", 7)
 }
 
 Chunk <- function(vecteur,taille_vecteur)
@@ -96,6 +146,26 @@ Buisson <- function(vecteur,taille_monde,taille_vecteur)
   }
 }
   
+Astre<-function(taille_monde,vecteur,taille)
+{
+
+  if (vecteur[taille]>vecteur[1])
+  {
+    OutilsAstre(taille_monde,taille_monde*3/4,taille_monde)       ## Astre a droite
+  }
+  else if(vecteur[taille]<vecteur[1])
+  {
+    OutilsAstre(0,taille_monde*3/4,taille_monde)
+  }
+  else
+  {
+    OutilsAstre(taille_monde/2,taille_monde*3/4,taille_monde)
+  }
+}
+
+
+
+
   
   #Chunk(posX*10, as.integer(SeedVector[compteurY])*10, as.integer(SeedVector[compteurX])*10, as.integer(SeedVector[compteurY])*10)
   #buisson(posX*10 + (as.integer(SeedVector[compteurX])*10 / 2), as.integer(SeedVector[compteurY])*10,SeedVector)

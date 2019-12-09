@@ -206,6 +206,52 @@ Quadri <- function(largeur,hauteur,i,colour,epaisseur)
   }
 }
 
+OutilsAstre<-function(posX,posY,taille_monde)
+{
+  setpos(posX,posY)
+  j<-0
+  if(taille_monde>=950)
+  {
+    couleur="#FFD644"  # Couleur Soleil
+    couleur2="#FFD644"  # Rayon de Soleil
+    turtle_setangle(5)  ## On reangle la tortue pour ne pas faire de rayon sur l'horizon
+    turtle_col(couleur2)
+    turtle_param(lwd=1)
+    while(j<360)
+    {
+      turtle_forward(taille_monde/5)
+      turtle_backward(taille_monde/5)
+      turtle_setangle(j)
+      j<-j+28
+    }
+  }
+  else
+  {
+    couleur="#808080"  ## Couleur Lune
+  }
+  turtle_col(couleur)
+  turtle_param(lwd=7)
+ # setpos(posX,posY)
+ 
+  for(i in 1:360)    ## on fait un rond complet, meme si on n'en verra qu'une partie. On se garde simplement la possibilite de faire apparaitre un astre complet
+  {
+    turtle_setangle(i)
+    turtle_forward(taille_monde/10)
+    turtle_backward(taille_monde/10)
+    
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
 setpos<-function(x,y) # Cette fonction est utile,
 {                     # pour deplacer la tortue sans faire de trait.
   turtle_up()
