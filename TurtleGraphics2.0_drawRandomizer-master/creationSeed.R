@@ -54,7 +54,7 @@ creationDuSeed<-function(scan,vecteur,taille)
 
 CreationDuvecteurTemporaire<-function(scan,taille)
 {
-  tmp<-utf8ToInt(scan)*1234 # tmp prend la valeur de scan, en int, et agrandi par un nombre dÃ©fini au hasard
+  tmp<-utf8ToInt(scan)*1234 # tmp prend la valeur de scan, en int, et agrandi par un nombre défini au hasard
   if(nchar(tmp)<taille)     # Si la taille de tmp est trop faible pour remplir le vecteur voulu, on l'agrandi (dans le while)
   {
     hasard<-5678
@@ -74,6 +74,7 @@ hashDuSeed <- function(tmp,taille)
 {
   tmp_entier <- paste(tmp, collapse="")
   tmp_vecteur <- numeric(nchar(tmp_entier))
+  j<-0
   #print(tmp_entier)
   for (l in 1:(nchar(tmp_entier)))
   {
@@ -83,12 +84,14 @@ hashDuSeed <- function(tmp,taille)
   
   tmpNum<-numeric(taille) # pour eviter des problemes de type, on passe tmp en numeric et on lui affecte des integer
   #print(tmp_vecteur)
-  for(j in 1:taille)
+  for(acc in 1:taille)
   {
-    tmpNum[j]<-tmp_vecteur[j + (length(tmp_vecteur)/taille)]
+    j<-j+length(tmp_vecteur) / taille
+    tmpNum[acc]<-tmp_vecteur[j]
     
   }
   return (tmpNum)
 }
+
 
 
