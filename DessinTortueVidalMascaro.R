@@ -1,9 +1,12 @@
 ## PROJET: TurtleRandomizer
-## ETUDIANT_1: VALENTIN MASCARO (21812677)
+## ETUDIANT_1: VALENTIN MASCARO 
 ## ETUDIANT_2: ANTOINE VIDAL-MAZUY (21702760)
 
 ## Lien vers le rapport en pdf https://drive.google.com/open?id=1sgEXfzdzHWn3g1gI7hojwq7VYTEd3DhM
 ## Lien vers le github https://github.com/Brotherta/TurtleGraphics2.0_drawRandomizer
+
+## Pour lancer la generation de dessin appeller la fonction DoIt() sans parametre.
+## Le dessin sera sauvegarde en pdf dans le repertoire courant.
 
 library("grid")
 library("TurtleGraphics")
