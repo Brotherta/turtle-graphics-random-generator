@@ -1,5 +1,5 @@
 ## PROJET: TurtleRandomizer
-## ETUDIANT_1: VALENTIN MASCARO 
+## ETUDIANT_1: VALENTIN MASCARO (21812677)
 ## ETUDIANT_2: ANTOINE VIDAL-MAZUY (21702760)
 
 ## Lien vers le rapport en pdf https://drive.google.com/open?id=1sgEXfzdzHWn3g1gI7hojwq7VYTEd3DhM
