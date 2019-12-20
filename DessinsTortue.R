@@ -6,6 +6,8 @@ library("TurtleGraphics")
 
 ## POUR LANCER LA FONCTION : APPELER DoIt() SANS PARAMETRE
 ## UN FICHIER PDF DesinTortue.pdf SERA CREER DANS LE REPERTOIRE COURANT
+## Lien vers le rapport en pdf https://drive.google.com/open?id=1sgEXfzdzHWn3g1gI7hojwq7VYTEd3DhM
+## Lien vers le github https://github.com/Brotherta/TurtleGraphics2.0_drawRandomizer
 
 DoIt<-function(taille = 40)
 {
