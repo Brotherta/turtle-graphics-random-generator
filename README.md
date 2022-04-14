@@ -7,7 +7,7 @@ There is differents biome and multiple daytime determined randomly.
 
 # Exemples
 
-![./pictures/day-corrupted.png]
-![./pictures/day-snow.png]
-![./pictures/day-spring.png]
-![./pictures/night-snow.png]
+![plot](./pictures/day-corrupted.png)
+![plot](./pictures/day-snow.png)
+![plot](./pictures/day-spring.png)
+![plot](./pictures/night-snow.png)
