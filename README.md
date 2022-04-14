@@ -1,4 +1,13 @@
-# TurtleGraphics2.0_drawRandomizer
-This is the better randomizer in the world.
+# turtle-graphics-random-generator
 
-Avancement du projet et brainstorming, ca se passe ici -> https://docs.google.com/document/d/1gN0o-iNQ_BT8o9ufWVhJMV2qUezNifFHmPR3KiTwsIY/edit
+Generation of random drawing using turtle graphics in R.
+From a phrase seed given in argument, it generates a pictures inspired by the game Terraria.
+
+There is differents biome and multiple daytime determined randomly.
+
+# Exemples
+
+![./pictures/day-corrupted.png]
+![./pictures/day-snow.png]
+![./pictures/day-spring.png]
+![./pictures/night-snow.png]
